@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Etiqueta vídeo</title>
+  </head>
+  <body>
+    <audio id="video" loop controls>
+      <source src="./music.mp3" type="audio/mp3">
+      Tu navegador no soporta la etiqueta
+    </audio>
+
+    <button id="playButton">Reproducir</button>
+    <button id="pauseButton">Pausar</button>
+    <button id="stopButton">Detener</button>
+    <button id="backwardButton">&lt;&lt;</button>
+    <button id="forwardButton">&gt;&gt;</button>
+    <button id="volumeUpButton">+</button>
+    <button id="volumeDownButton">-</button>
+
+    <script type="text/javascript">
+
+      let video = document.getElementById('video');
+
+
+
+
+      let playButton = document.getElementById('playButton');
+      let pauseButton = document.getElementById('pauseButton');
+      let stopButton = document.getElementById('stopButton');
+
+      let backwardButton = document.getElementById('backwardButton');
+      let forwardButton = document.getElementById('forwardButton');
+
+      let volumeUpButton = document.getElementById('volumeUpButton');
+      let volumeDownButton = document.getElementById('volumeDownButton');
+
+      playButton.addEventListener('click',function(){
+
+        video.play();
+      });
+
+      pauseButton.addEventListener('click',function(){
+        video.pause();
+      });
+
+      stopButton.addEventListener('click',function(){
+        video.pause();
+
+        video.currentTime = 0;
+      });
+
+      backwardButton.addEventListener('click',function(){
+
+        video.currentTime -= 1;
+      });
+
+      forwardButton.addEventListener('click',function(){
+
+        video.currentTime += 1;
+      });
+
+      video.addEventListener('play',function(){
+        console.log("Reproducirrrrr");
+      })
+
+      video.addEventListener('progress',function(){
+        console.log(video.duration);
+      });
+
+      volumeDownButton.addEventListener('click',function(){
+        if(video.volume >= 0.1) video.volume -= 0.1;
+
+      });
+
+      volumeUpButton.addEventListener('click',function(){
+        if(video.volume <= 0.9) video.volume += 0.1;
+
+      });
+
+
+
+
+    </script>
+  </body>
+</html>

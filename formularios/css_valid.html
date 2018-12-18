@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hola mundo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style media="screen">
+      input:valid + span:after{
+        content:'\f00c';
+        font-family: FontAwesome;
+        color:green;
+      }
+      input:invalid + span:after{
+        content:'\f00d';
+        font-family: FontAwesome;
+        color:red;
+      }
+      input{width:350px !important;display: inline-block !important;}
+    </style>
+  </head>
+  <body>
+    <form class="" action="index.html" method="post">
+      <div class="">
+          <input type="url">
+          <span></span>
+      </div>
+      <div class="">
+          <input type="text">
+          <span></span>
+      </div>
+      <div class="">
+          <input type="email" required autocomplete="off">
+          <span></span>
+      </div>
+      <div class="">
+          <input type="text" required>
+          <span></span>
+      </div>
+
+
+
+    </form>
+    <button id="button" class="btn blue">Probar</button>
+    <script type="text/javascript">
+
+    </script>
+  </body>
+</html>

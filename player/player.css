@@ -1,0 +1,131 @@
+.video-player{
+  position: relative;
+  display: inline-block;
+}
+
+.video-player:hover .controls{
+  opacity: 1;
+}
+
+.controls{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center; /* Centra verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  opacity: 0;
+  transition: all 0.2s;
+}
+
+
+.controls .top{
+  position: absolute;
+  top:1em;
+  width: 95%;
+  text-align: right;
+}
+
+.controls .top .toggleSlide{
+  height: 25px;
+  overflow: hidden;
+  display: inline-block;
+  transition: height 0.2s;
+  vertical-align: top;
+}
+
+.controls .top .toggleSlide.active{
+  height: 150px;
+}
+
+.controls .top .speed span{
+  display: block;
+  background-color: #000;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+  border-radius: 3px;
+  color: white;
+  padding: 5px 10px;
+  margin-top: 2px;
+}
+
+.controls .top [type=range]{
+  margin-top: 40px;
+  margin-right: -28px;
+  transform: rotate(270deg);
+  -webkit-appearance: none;
+  background-color: white;
+  height: 5px;
+  width: 80px;
+  box-shadow: none;
+  border-radius: 5px;
+  outline: 5px;
+}
+
+.controls .top [type=range]::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background-color: #00e676;
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+.controls .bottom{
+  position: absolute;
+  bottom:1em;
+  width: 95%;
+}
+
+.controls .bottom .progress{
+  height: 10px;
+  position: relative;
+  cursor: pointer;
+  z-index:1000;
+  border-radius: 8px;
+  background-color: #000;
+}
+
+.controls .bottom .progress .bar{
+  height: 100%;
+  width: 0%;
+  border-radius: 8px;
+  background-color: #00e676;
+}
+
+.controls .bottom .bar-controls{
+  color: rgba(255,255,255,1);
+  margin-bottom: 3px;
+}
+
+.controls .bottom .bar-controls i{
+  margin-top: -3px;
+  margin-left: 0.5em;
+}
+
+.pointer{
+  cursor: pointer;
+}
+.pull-right{
+  float: right;
+}
+
+/* Rules for sizing the icon. */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-96 { font-size: 96px; }
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3);

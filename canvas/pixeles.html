@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pixeles</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="600"></canvas>
+
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = 'rgb(200,50,50)';
+      ctx.fillRect(0,0,20,20);
+
+      let image = new Image();
+
+      image.src = "./perrito.jpg";
+
+      image.onload = function(){
+        console.log("La imagen fue cargada");
+
+        //ctx.drawImage(imagen,imagenX,imagenY,imagenAncho,imagenAlto,cX,cY,ancho,alto)
+
+        ctx.drawImage(this,0,0);
+
+
+
+        convertirBlancoyNegro();
+
+      }
+
+      function convertirBlancoyNegro(){
+        let imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
+
+        let pixeles = imageData.data;
+
+        console.log("Inicié la conversión");
+
+        for(let i = 0; i < pixeles.length; i += 4){
+          const pixel = {
+            r: pixeles[i],
+            g: pixeles[i+1],
+            b: pixeles[i+2],
+            a: pixeles[i+3]
+          };
+
+          const average = (pixel.r + pixel.g + pixel.b) / 3;
+
+
+          pixeles[i] = average;
+          pixeles[i+1] = average;
+          pixeles[i+2] = average;
+
+        }
+
+        ctx.putImageData(imageData,0,0);
+
+
+        console.log("Finalicé la conversión");
+
+
+
+
+      }
+
+
+
+    </script>
+  </body>
+</html>

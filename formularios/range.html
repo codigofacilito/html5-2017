@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Input Date</title>
+    <style>
+      input[type='range']{
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-color: #222;
+        height:6px;
+        outline:none;
+        border-radius:8px;
+      }
+      [type='range']::-webkit-slider-thumb{
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-color: #00e676;
+        height: 15px;
+        width:15px;
+        border-radius:50%;
+      }
+      input[type='range']::moz-slider-thumb{}
+      input[type='range']::ms-slider-thumb{}
+    </style>
+  </head>
+  <body>
+    <form>
+      <span id="valor"></span>
+      <input type="range" max="100" min="0" step="10">
+    </form>
+
+    <script type="text/javascript">
+
+      let rangeEl = document.querySelector('input[type="range"]');
+
+      rangeEl.addEventListener('input',function(){
+        document.querySelector('#valor').innerHTML = rangeEl.value;
+      });
+
+      setTimeout(function(){
+        rangeEl.stepUp();
+      },1000)
+
+      setTimeout(function(){
+        rangeEl.stepDown();
+      },2000)
+
+    </script>
+  </body>
+</html>

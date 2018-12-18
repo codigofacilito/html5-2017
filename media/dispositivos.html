@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hola mundo</title>
+  </head>
+  <body>
+    <img src="bigote.png" id="bigote" style="display:none;">
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <video id="video" autoplay style="display:none;" width="800" height="600">
+
+    </video>
+    <select id="camera-selector">
+
+    </select>
+  </body>
+
+  <script src="clmtrackr-dev/clmtrackr.js"></script>
+  <script src="clmtrackr-dev/models/model_pca_20_svm.js"></script>
+
+  <script>
+    let video = document.getElementById('video');
+    let selectTag = document.getElementById('camera-selector');
+    let canvas = document.getElementById('canvas');
+    let bigote = document.getElementById('bigote');
+    let lentes = new Image();
+    let imageLoaded = false;
+    const context = canvas.getContext('2d');
+    const ctracker = new clm.tracker();
+    ctracker.init(pModel);
+
+
+    lentes.src = "lentes.png";
+
+    lentes.onload = function(){
+      imageLoaded = true;
+    }
+
+    navigator.mediaDevices.enumerateDevices().then(devices => {
+      devices.forEach(device => {
+        if(device.kind != "videoinput") return;
+
+        let optionTag = document.createElement("option");
+
+        optionTag.innerHTML = device.label;
+
+        optionTag.value = device.deviceId;
+
+        selectTag.appendChild(optionTag);
+
+      })
+    });
+
+    selectTag.addEventListener("change",function(ev){
+      let deviceId = this.options[this.selectedIndex].value;
+
+      start(deviceId);
+    })
+
+
+    function start(deviceId = undefined){
+      const constraints = {
+        video: {
+          deviceId: deviceId
+        }
+      }
+
+
+      navigator.mediaDevices.getUserMedia(constraints)
+              .then(stream =>{
+                video.srcObject = stream;
+                setTimeout(function(){
+                    ctracker.start(video);
+                    requestAnimationFrame(loop);
+                },500)
+              })
+              .catch(err => console.log(err));
+    }
+
+
+    function drawImageRealTime(imagen,positions,modifierWidth, modifierHeight){
+      console.log(positions);
+      if(!positions.x.init || !positions.x.final || !positions.y.final || !positions.y.init)
+        return;
+
+      const x1 = positions.x.init[0] - modifierWidth;
+      const x2 = positions.x.final[0] + modifierWidth;
+
+      const y1 = positions.y.init[1] - modifierHeight;
+      const y2 = positions.y.final[1] + modifierHeight;
+
+
+      const width = x2 - x1;
+      const height = y2 - y1;
+
+      context.drawImage(imagen,x1,
+                              y1,
+                              width,
+                              height);
+    }
+
+    function loop(){
+      context.drawImage(video,0,0,800,600);
+      // ctracker.draw(canvas);
+
+      let positions = ctracker.getCurrentPosition();
+
+      if(imageLoaded)
+        drawImageRealTime(lentes,{
+          x:{
+            init: positions[0],
+            final: positions[14]
+          },
+          y:{
+            init: positions[33],
+            final: positions[41]
+          }
+        },0,15)
+
+        drawImageRealTime(bigote,{
+          x:{
+            init: positions[44],
+            final: positions[50]
+          },
+          y:{
+            init: positions[37],
+            final: positions[47]
+          }
+        },40,15)
+
+      requestAnimationFrame(loop);
+    }
+
+    start();
+
+
+  </script>
+</html>

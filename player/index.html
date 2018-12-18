@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mi propio reproductor de vídeo</title>
+    <link rel="stylesheet" href="./player.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  </head>
+  <body>
+    <div class="video-player">
+      <video src="video.mp4" width="800" loop></video>
+
+      <div class="controls">
+        <div class="top">
+          <div class="volume toggleSlide">
+            <i class="material-icons md-light md-24 show-volume pointer">volume_up</i>
+            <div>
+              <input type="range" id="volume-range" value="1" min="0" max="1" step="0.05">
+            </div>
+          </div>
+          <div class="speed toggleSlide">
+            <i class="material-icons md-light md-24 pointer show-speed">settings</i>
+            <div>
+              <span class="playBackRate pointer" data-value="1.0">1x</span>
+              <span class="playBackRate pointer" data-value="2.0">2x</span>
+              <span class="playBackRate pointer" data-value="3.0">3x</span>
+            </div>
+          </div>
+        </div>
+        <div class="center">
+          <i class="material-icons md-96 md-light pointer play-pause"> play_arrow </i>
+        </div>
+
+        <div class="bottom">
+          <div class="bar-controls">
+            <span class="current-duration">0:00</span>
+            <span class="pull-right">
+              <i class="material-icons md-light md-24 set-full-screen pointer">fullscreen</i>
+            </span>
+            <span class="pull-right full-duration">0:00</span>
+
+          </div>
+
+          <div class="progress">
+            <div class="bar">
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <script src="./player.js">
+
+    </script>
+    <script>
+      let video = new Video('.video-player');
+    </script>
+
+  </body>
+</html>

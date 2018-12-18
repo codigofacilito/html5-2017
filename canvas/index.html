@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Canvas</title>
+    <style media="screen">
+      canvas{border:solid;}
+
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+
+    <script>
+      let canvas = document.getElementById('canvas');
+
+      canvas.width = 800;
+      canvas.height = 600;
+
+      let context = canvas.getContext('2d');
+
+      let linealGradient = context.createLinearGradient(400,400,400,430);
+      // let radialGradient = context.createRadialGradient(x1,y1,r1,x2,y2,r2)
+
+      linealGradient.addColorStop(0,'#2979ff');
+      linealGradient.addColorStop(1,'rgba(200,50,50,1)');
+
+      // beginPath() closePath() moveTo() lineTo() arcTo() arc
+
+      context.lineWidth = 10;
+      context.lineCap = 'square';
+      context.beginPath();
+
+      context.moveTo(100,20);
+      context.lineTo(100,60);
+
+      context.strokeStyle = 'rgba(200,50,50,1)';
+      context.stroke();
+
+      context.beginPath();
+
+      context.moveTo(200,20);
+      context.lineTo(200,60);
+      context.strokeStyle = '#2979ff';
+      context.stroke();
+
+      context.beginPath();
+
+      context.arc(150,80,40,0,Math.PI);
+      context.strokeStyle = 'black';
+      context.stroke();
+
+      context.beginPath();
+
+      context.arc(400,400,40,0,Math.PI*2);
+      context.fillStyle = linealGradient;
+      context.fill();
+
+
+
+
+    </script>
+
+
+  </body>
+</html>
